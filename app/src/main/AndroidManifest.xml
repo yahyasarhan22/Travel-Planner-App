@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.xmls.com/apk/res/android"
+    package="com.example.a1221858_1220137_courseproject">
+
+    <application
+        android:allowBackup="true"
+        android:label="Trip App"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat">
+        
+        <!-- Activities will be defined here -->
+        
+    </application>
+
+</manifest>
