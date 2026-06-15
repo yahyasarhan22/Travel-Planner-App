@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="left_bg_light">#EEEEEE</color>
+    <color name="left_accent">#6FCF97</color>
+    <color name="left_primary">#2FA084</color>
+    <color name="left_primary_dark">#1F6F5F</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_text">#757575</color>
+</resources>
