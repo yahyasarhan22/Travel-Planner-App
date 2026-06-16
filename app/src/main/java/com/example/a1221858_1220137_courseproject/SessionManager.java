@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 // SessionManager is a Singleton class that saves the logged-in user info
-// using SharedPreferences
 public class SessionManager {
 
     // Name of the SharedPreferences file
@@ -23,7 +22,6 @@ public class SessionManager {
     // SharedPreferences object and its editor
     private static SharedPreferences sharedPreferences = null;
     private SharedPreferences.Editor editor = null;
-
 
     // Private constructor — sets up sharedPreferences and editor
     private SessionManager(Context context) {
@@ -51,7 +49,6 @@ public class SessionManager {
         editor.commit(); // save all changes
     }
 
-
     // Clear session when user logs out
     public void logout() {
         editor.clear();
@@ -78,5 +75,22 @@ public class SessionManager {
 
     public boolean isAdmin() {
         return sharedPreferences.getInt(KEY_IS_ADMIN, 0) == 1;
+    }
+
+    // Save the email when Remember Me is checked
+    public void saveRememberedEmail(String email) {
+        editor.putString("rememberedEmail", email);
+        editor.commit();
+    }
+
+    // Clear the remembered email when Remember Me is unchecked
+    public void clearRememberedEmail() {
+        editor.remove("rememberedEmail");
+        editor.commit();
+    }
+
+    // Get the remembered email — returns empty string if none saved
+    public String getRememberedEmail() {
+        return sharedPreferences.getString("rememberedEmail", "");
     }
 }
