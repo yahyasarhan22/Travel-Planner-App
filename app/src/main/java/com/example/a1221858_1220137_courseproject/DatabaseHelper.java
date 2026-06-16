@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Insert the required admin account — project requires admin@admin.com / Admin123!
         // Password is encrypted with MD5 same as PasswordHelper.encrypt()
-        String adminPassword = PasswordHelper.encrypt("Admin123!");
+        String adminPassword = PasswordEncryptor.encrypt("Admin123!");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_USER +
                         " (EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, GENDER, MAJOR, PHONE, PROFILE_PIC, IS_ADMIN)" +
@@ -84,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATION);
         onCreate(sqLiteDatabase);
     }
-    
+
     // USER methods
     // Insert a User into the USER table
     // We do NOT put the ID — SQLite assigns it automatically with AUTOINCREMENT

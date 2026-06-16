@@ -188,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
         String phone     = editTextPhone.getText().toString().trim();
 
         // Encrypt the password before saving — project requires secure storage
-        String encryptedPassword = PasswordHelper.encrypt(password);
+        String encryptedPassword = PasswordEncryptor.encrypt(password);
 
         // Create a new User object (id=0, isAdmin=0 for regular users)
         User newUser = new User(

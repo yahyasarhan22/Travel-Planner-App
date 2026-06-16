@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString().trim();
 
         // Encrypt the password before checking (MD5 — simple encryption)
-        String encryptedPassword = PasswordHelper.encrypt(password);
+        String encryptedPassword = PasswordEncryptor.encrypt(password);
 
         // Check database for matching user
         Cursor cursor = databaseHelper.getUserByEmailAndPassword(email, encryptedPassword);
