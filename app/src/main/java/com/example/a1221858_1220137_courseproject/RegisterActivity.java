@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // Fill gender and major spinners with options using ArrayAdapter
+    // Same approach as lab manual spinner setup
     private void setupSpinners() {
 
         // Gender options
@@ -187,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
         String major     = spinnerMajor.getSelectedItem().toString();
         String phone     = editTextPhone.getText().toString().trim();
 
-        // Encrypt the password before saving — project requires secure storage
+        // Encrypt the password before saving — project requires AES encryption
         String encryptedPassword = PasswordEncryptor.encrypt(password);
 
         // Create a new User object (id=0, isAdmin=0 for regular users)

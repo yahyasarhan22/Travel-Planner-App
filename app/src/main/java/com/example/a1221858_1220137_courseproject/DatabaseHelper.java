@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-// DatabaseHelper extends SQLiteOpenHelper
+// DatabaseHelper handles all database operations
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database name and version
@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
+    // ---------------------------------------------------------------
     // onCreate — creates all three tables when the database is first made
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -66,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         // Insert the required admin account — project requires admin@admin.com / Admin123!
-        // Password is encrypted with MD5 same as PasswordHelper.encrypt()
+        // Password is encrypted with AES same as PasswordEncryptor.encrypt()
         String adminPassword = PasswordEncryptor.encrypt("Admin123!");
         sqLiteDatabase.execSQL(
                 "INSERT INTO " + TABLE_USER +
@@ -75,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
+    // ---------------------------------------------------------------
     // onUpgrade — called if DATABASE_VERSION increases in the future
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
@@ -85,7 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    // ===============================================================
     // USER methods
+
     // Insert a User into the USER table
     // We do NOT put the ID — SQLite assigns it automatically with AUTOINCREMENT
     public void insertUser(User user) {
@@ -105,7 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_USER, null, contentValues);
     }
 
-    // Get all users — returns a Cursor, same as getAllCustomers() in lab manual
+    // Get all users — returns a Cursor
     public Cursor getAllUsers() {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_USER, null);
@@ -121,10 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
-    // ===============================================================
     // TRIP methods
-    // ===============================================================
-
     // Insert a Trip into the TRIP table
     public void insertTrip(Trip trip) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
@@ -144,8 +145,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TRIP, null);
     }
-    // RESERVATION methods
 
+    // RESERVATION methods
     // Insert a Reservation into the RESERVATION table
     // We do NOT put the ID — SQLite assigns it automatically with AUTOINCREMENT
     public void insertReservation(Reservation reservation) {
