@@ -20,7 +20,7 @@
             android:layout_height="100dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="@dimen/spacing_large"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@android:drawable/ic_menu_gallery"
             android:contentDescription="App Logo" />
 
         <!-- App title -->
@@ -62,7 +62,8 @@
             android:padding="@dimen/spacing_medium"
             android:textColor="@color/black"
             android:textColorHint="@color/gray_text"
-            android:layout_marginBottom="@dimen/spacing_medium" />
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:importantForAutofill="no" />
 
         <!-- Password field -->
         <TextView
@@ -84,7 +85,8 @@
             android:padding="@dimen/spacing_medium"
             android:textColor="@color/black"
             android:textColorHint="@color/gray_text"
-            android:layout_marginBottom="@dimen/spacing_medium" />
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:importantForAutofill="no" />
 
         <!-- Remember Me checkbox -->
         <CheckBox
