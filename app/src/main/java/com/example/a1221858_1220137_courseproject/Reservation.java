@@ -21,7 +21,6 @@ public class Reservation {
         this.status = status;
     }
 
-    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

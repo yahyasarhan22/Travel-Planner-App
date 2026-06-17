@@ -1,6 +1,5 @@
 package com.example.a1221858_1220137_courseproject;
 
-
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
