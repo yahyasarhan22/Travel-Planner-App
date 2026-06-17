@@ -5,224 +5,176 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.example.a1221858_1220137_courseproject.Trip;
-import com.example.a1221858_1220137_courseproject.User;
-import com.example.a1221858_1220137_courseproject.Reservation;
-import java.util.ArrayList;
-import java.util.List;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+// DatabaseHelper handles all database operations
+public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "TravelPlanner.db";
+    // Database name and version
+    private static final String DATABASE_NAME = "TripApp.db";
     private static final int DATABASE_VERSION = 1;
 
-    public static final String TABLE_USERS = "users";
-    public static final String TABLE_TRIPS = "trips";
-    public static final String TABLE_RESERVATIONS = "reservations";
-    public static final String TABLE_FAVORITES = "favorites";
+    // Table names
+    private static final String TABLE_USER        = "USER";
+    private static final String TABLE_TRIP        = "TRIP";
+    private static final String TABLE_RESERVATION = "RESERVATION";
 
-    public static final String KEY_ID = "id";
-
-    public static final String KEY_USER_EMAIL = "email";
-    public static final String KEY_USER_FIRST_NAME = "first_name";
-    public static final String KEY_USER_LAST_NAME = "last_name";
-    public static final String KEY_USER_PASSWORD = "password";
-    public static final String KEY_USER_GENDER = "gender";
-    public static final String KEY_USER_MAJOR = "major";
-    public static final String KEY_USER_PHONE = "phone";
-    public static final String KEY_USER_PROFILE_PIC = "profile_pic";
-    public static final String KEY_USER_IS_ADMIN = "is_admin";
-
-    public static final String KEY_TRIP_DESTINATION = "destination";
-    public static final String KEY_TRIP_COUNTRY = "country";
-    public static final String KEY_TRIP_DURATION = "duration_days";
-    public static final String KEY_TRIP_PRICE = "price";
-    public static final String KEY_TRIP_RATING = "rating";
-    public static final String KEY_TRIP_DESCRIPTION = "description";
-    public static final String KEY_TRIP_IMAGE_URL = "image_url";
-
-    public static final String KEY_RES_USER_ID = "user_id";
-    public static final String KEY_RES_TRIP_ID = "trip_id";
-    public static final String KEY_RES_QUANTITY = "quantity";
-    public static final String KEY_RES_TYPE = "type";
-    public static final String KEY_RES_DATE = "date";
-    public static final String KEY_RES_STATUS = "status";
-
-    public static final String KEY_FAV_USER_ID = "user_id";
-    public static final String KEY_FAV_TRIP_ID = "trip_id";
-
-    public DataBaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    // Constructor
+    public DatabaseHelper(Context context, String name,
+                          SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
     }
 
+    // ---------------------------------------------------------------
+    // onCreate — creates all three tables when the database is first made
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_USER_EMAIL + " TEXT UNIQUE,"
-                + KEY_USER_FIRST_NAME + " TEXT,"
-                + KEY_USER_LAST_NAME + " TEXT,"
-                + KEY_USER_PASSWORD + " TEXT,"
-                + KEY_USER_GENDER + " TEXT,"
-                + KEY_USER_MAJOR + " TEXT,"
-                + KEY_USER_PHONE + " TEXT,"
-                + KEY_USER_PROFILE_PIC + " TEXT,"
-                + KEY_USER_IS_ADMIN + " INTEGER DEFAULT 0" + ")";
-        db.execSQL(CREATE_USERS_TABLE);
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String CREATE_TRIPS_TABLE = "CREATE TABLE " + TABLE_TRIPS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY,"
-                + KEY_TRIP_DESTINATION + " TEXT,"
-                + KEY_TRIP_COUNTRY + " TEXT,"
-                + KEY_TRIP_DURATION + " INTEGER,"
-                + KEY_TRIP_PRICE + " REAL,"
-                + KEY_TRIP_RATING + " REAL,"
-                + KEY_TRIP_DESCRIPTION + " TEXT,"
-                + KEY_TRIP_IMAGE_URL + " TEXT" + ")";
-        db.execSQL(CREATE_TRIPS_TABLE);
+        // Create USER table — ID is auto assigned by SQLite
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_USER + " (" +
+                        "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "EMAIL TEXT, " +
+                        "FIRST_NAME TEXT, " +
+                        "LAST_NAME TEXT, " +
+                        "PASSWORD TEXT, " +
+                        "GENDER TEXT, " +
+                        "MAJOR TEXT, " +
+                        "PHONE TEXT, " +
+                        "PROFILE_PIC TEXT, " +
+                        "IS_ADMIN INTEGER)"
+        );
 
-        String CREATE_RESERVATIONS_TABLE = "CREATE TABLE " + TABLE_RESERVATIONS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_RES_USER_ID + " INTEGER,"
-                + KEY_RES_TRIP_ID + " INTEGER,"
-                + KEY_RES_QUANTITY + " INTEGER,"
-                + KEY_RES_TYPE + " TEXT,"
-                + KEY_RES_DATE + " TEXT,"
-                + KEY_RES_STATUS + " TEXT,"
-                + "FOREIGN KEY(" + KEY_RES_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + KEY_ID + "),"
-                + "FOREIGN KEY(" + KEY_RES_TRIP_ID + ") REFERENCES " + TABLE_TRIPS + "(" + KEY_ID + ")" + ")";
-        db.execSQL(CREATE_RESERVATIONS_TABLE);
+        // Create TRIP table
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_TRIP + " (" +
+                        "ID INTEGER PRIMARY KEY, " +
+                        "DESTINATION TEXT, " +
+                        "DURATION TEXT, " +
+                        "PRICE REAL, " +
+                        "DESCRIPTION TEXT)"
+        );
 
-        String CREATE_FAVORITES_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_FAV_USER_ID + " INTEGER,"
-                + KEY_FAV_TRIP_ID + " INTEGER,"
-                + "FOREIGN KEY(" + KEY_FAV_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + KEY_ID + "),"
-                + "FOREIGN KEY(" + KEY_FAV_TRIP_ID + ") REFERENCES " + TABLE_TRIPS + "(" + KEY_ID + ")" + ")";
-        db.execSQL(CREATE_FAVORITES_TABLE);
+        // Create RESERVATION table — ID is auto assigned by SQLite
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE " + TABLE_RESERVATION + " (" +
+                        "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "USER_ID INTEGER, " +
+                        "TRIP_ID INTEGER, " +
+                        "QUANTITY INTEGER, " +
+                        "TYPE TEXT, " +
+                        "DATE TEXT, " +
+                        "STATUS TEXT)"
+        );
+
+        // Insert the required admin account — project requires admin@admin.com / Admin123!
+        // Password is encrypted with AES same as PasswordEncryptor.encrypt()
+        String adminPassword = PasswordEncryptor.encrypt("Admin123!");
+        sqLiteDatabase.execSQL(
+                "INSERT INTO " + TABLE_USER +
+                        " (EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, GENDER, MAJOR, PHONE, PROFILE_PIC, IS_ADMIN)" +
+                        " VALUES ('admin@admin.com', 'Admin', 'Admin', '" + adminPassword + "', 'Male', 'Admin', '0000000000', '', 1)"
+        );
     }
 
+    // ---------------------------------------------------------------
+    // onUpgrade — called if DATABASE_VERSION increases in the future
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATIONS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRIPS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        // Drop old tables and recreate — simple approach from lab manual
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_TRIP);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATION);
+        onCreate(sqLiteDatabase);
     }
 
+    // ===============================================================
+    // USER methods
+
+    // Insert a User into the USER table
+    // We do NOT put the ID — SQLite assigns it automatically with AUTOINCREMENT
+    public void insertUser(User user) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("EMAIL",       user.getEmail());
+        contentValues.put("FIRST_NAME",  user.getFirstName());
+        contentValues.put("LAST_NAME",   user.getLastName());
+        contentValues.put("PASSWORD",    user.getPassword());
+        contentValues.put("GENDER",      user.getGender());
+        contentValues.put("MAJOR",       user.getMajor());
+        contentValues.put("PHONE",       user.getPhone());
+        contentValues.put("PROFILE_PIC", user.getProfilePic());
+        contentValues.put("IS_ADMIN",    user.getIsAdmin());
+
+        sqLiteDatabase.insert(TABLE_USER, null, contentValues);
+    }
+
+    // Get all users — returns a Cursor
+    public Cursor getAllUsers() {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_USER, null);
+    }
+
+    // Get one user by email and password — used for login check
+    public Cursor getUserByEmailAndPassword(String email, String password) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery(
+                "SELECT * FROM " + TABLE_USER +
+                        " WHERE EMAIL = ? AND PASSWORD = ?",
+                new String[]{email, password}
+        );
+    }
+
+    // TRIP methods
+    // Insert a Trip into the TRIP table
     public void insertTrip(Trip trip) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_ID, trip.getId());
-        values.put(KEY_TRIP_DESTINATION, trip.getDestination());
-        values.put(KEY_TRIP_COUNTRY, trip.getCountry());
-        values.put(KEY_TRIP_DURATION, trip.getDurationDays());
-        values.put(KEY_TRIP_PRICE, trip.getPrice());
-        values.put(KEY_TRIP_RATING, trip.getRating());
-        values.put(KEY_TRIP_DESCRIPTION, trip.getDescription());
-        values.put(KEY_TRIP_IMAGE_URL, trip.getImageUrl());
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
-        db.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-        db.close();
+        contentValues.put("ID",          trip.getId());
+        contentValues.put("DESTINATION", trip.getDestination());
+        contentValues.put("DURATION",    trip.getDuration());
+        contentValues.put("PRICE",       trip.getPrice());
+        contentValues.put("DESCRIPTION", trip.getDescription());
+
+        sqLiteDatabase.insert(TABLE_TRIP, null, contentValues);
     }
 
-    public List<Trip> getAllTrips() {
-        List<Trip> tripList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_TRIPS, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Trip trip = new Trip();
-                trip.setId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)));
-                trip.setDestination(cursor.getString(cursor.getColumnIndexOrThrow(KEY_TRIP_DESTINATION)));
-                trip.setCountry(cursor.getString(cursor.getColumnIndexOrThrow(KEY_TRIP_COUNTRY)));
-                trip.setDurationDays(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_TRIP_DURATION)));
-                trip.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_TRIP_PRICE)));
-                trip.setRating(cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_TRIP_RATING)));
-                trip.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(KEY_TRIP_DESCRIPTION)));
-                trip.setImageUrl(cursor.getString(cursor.getColumnIndexOrThrow(KEY_TRIP_IMAGE_URL)));
-                tripList.add(trip);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return tripList;
+    // Get all trips — returns a Cursor
+    public Cursor getAllTrips() {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TRIP, null);
     }
 
-    public void deleteTrip(int tripId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_TRIPS, KEY_ID + " = ?", new String[]{String.valueOf(tripId)});
-        db.close();
+    // RESERVATION methods
+    // Insert a Reservation into the RESERVATION table
+    // We do NOT put the ID — SQLite assigns it automatically with AUTOINCREMENT
+    public void insertReservation(Reservation reservation) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("USER_ID",  reservation.getUserId());
+        contentValues.put("TRIP_ID",  reservation.getTripId());
+        contentValues.put("QUANTITY", reservation.getQuantity());
+        contentValues.put("TYPE",     reservation.getType());
+        contentValues.put("DATE",     reservation.getDate());
+        contentValues.put("STATUS",   reservation.getStatus());
+
+        sqLiteDatabase.insert(TABLE_RESERVATION, null, contentValues);
     }
 
-    public void updateTrip(Trip trip) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_TRIP_DESTINATION, trip.getDestination());
-        values.put(KEY_TRIP_COUNTRY, trip.getCountry());
-        values.put(KEY_TRIP_DURATION, trip.getDurationDays());
-        values.put(KEY_TRIP_PRICE, trip.getPrice());
-        values.put(KEY_TRIP_RATING, trip.getRating());
-        values.put(KEY_TRIP_DESCRIPTION, trip.getDescription());
-        values.put(KEY_TRIP_IMAGE_URL, trip.getImageUrl());
-
-        db.update(TABLE_TRIPS, values, KEY_ID + " = ?", new String[]{String.valueOf(trip.getId())});
-        db.close();
+    // Get all reservations — returns a Cursor
+    public Cursor getAllReservations() {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_RESERVATION, null);
     }
 
-    public long insertUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_USER_EMAIL, user.getEmail());
-        values.put(KEY_USER_FIRST_NAME, user.getFirstName());
-        values.put(KEY_USER_LAST_NAME, user.getLastName());
-        values.put(KEY_USER_PASSWORD, user.getPassword());
-        values.put(KEY_USER_GENDER, user.getGender());
-        values.put(KEY_USER_MAJOR, user.getMajor());
-        values.put(KEY_USER_PHONE, user.getPhone());
-        values.put(KEY_USER_PROFILE_PIC, user.getProfilePic());
-        values.put(KEY_USER_IS_ADMIN, user.getIsAdmin());
-
-        long id = db.insert(TABLE_USERS, null, values);
-        db.close();
-        return id;
-    }
-
-    public Cursor getUserByEmail(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_USER_EMAIL + " = ?", new String[]{email});
-    }
-
-    public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_USER_IS_ADMIN + " = 0", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                User user = new User();
-                user.setId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)));
-                user.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_EMAIL)));
-                user.setFirstName(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_FIRST_NAME)));
-                user.setLastName(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_LAST_NAME)));
-                user.setGender(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_GENDER)));
-                user.setMajor(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_MAJOR)));
-                user.setPhone(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_PHONE)));
-                user.setProfilePic(cursor.getString(cursor.getColumnIndexOrThrow(KEY_USER_PROFILE_PIC)));
-                user.setIsAdmin(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_USER_IS_ADMIN)));
-                userList.add(user);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return userList;
-    }
-
-    public void deleteUser(int userId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_USERS, KEY_ID + " = ?", new String[]{String.valueOf(userId)});
-        db.close();
+    // Get reservations for a specific user by their userId
+    public Cursor getReservationsByUserId(int userId) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery(
+                "SELECT * FROM " + TABLE_RESERVATION + " WHERE USER_ID = ?",
+                new String[]{String.valueOf(userId)}
+        );
     }
 }

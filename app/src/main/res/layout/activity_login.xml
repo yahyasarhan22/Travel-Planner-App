@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/left_bg_light"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large"
+        android:gravity="center">
+
+        <!-- App logo / icon at the top -->
+        <ImageView
+            android:id="@+id/imageView_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:contentDescription="App Logo" />
+
+        <!-- App title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Travel Planner"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/left_primary_dark"
+            android:layout_marginBottom="@dimen/spacing_small" />
+
+        <!-- Small welcome message -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back! Please login to continue."
+            android:textSize="14sp"
+            android:textColor="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_large" />
+
+        <!-- Email field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:importantForAutofill="no" />
+
+        <!-- Password field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:importantForAutofill="no" />
+
+        <!-- Remember Me checkbox -->
+        <CheckBox
+            android:id="@+id/checkBox_rememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember Me"
+            android:textColor="@color/gray_text"
+            android:buttonTint="@color/left_primary"
+            android:layout_marginBottom="@dimen/spacing_large" />
+
+        <!-- Login button -->
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/left_primary"
+            android:padding="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <!-- Sign up button -->
+        <Button
+            android:id="@+id/button_signUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Sign Up"
+            android:textColor="@color/left_primary"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/spacing_medium" />
+
+    </LinearLayout>
+
+</ScrollView>

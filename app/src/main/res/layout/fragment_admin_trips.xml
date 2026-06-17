@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_medium">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_admin_trips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_admin_add_trip"
+        android:layout_marginBottom="@dimen/spacing_small" />
+
+    <Button
+        android:id="@+id/btn_admin_add_trip"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/left_primary"
+        android:text="+ Add New Destination"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</RelativeLayout>
