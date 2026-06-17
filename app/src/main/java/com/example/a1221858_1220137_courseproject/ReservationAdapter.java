@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 // ReservationAdapter connects the list of reservations to the RecyclerView
-// Follows the standard Adapter + ViewHolder pattern
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder> {
 
     private Context context;
