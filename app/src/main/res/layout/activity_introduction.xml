@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/left_bg_light"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_large"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to your Next Adventure"
+        android:textColor="@color/left_primary_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sync data to explore unique destinations, seamlessly track reservations, and book custom travel experiences instantly."
+        android:textColor="@color/gray_text"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="40dp" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:indeterminateTint="@color/left_primary"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/left_primary"
+        android:text="Connect"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:elevation="4dp" />
+
+</LinearLayout>
