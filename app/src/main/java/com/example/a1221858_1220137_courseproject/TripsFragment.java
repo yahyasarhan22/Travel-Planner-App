@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +22,9 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
     private TripAdapter adapter;
     private List<Trip> allTripsList = new ArrayList<>();
     private final List<Trip> filteredTripsList = new ArrayList<>();
+    private DatabaseHelper dbHelper;
 
-    public TripsFragment() {
-    }
+    public TripsFragment() {}
 
     @Nullable
     @Override
@@ -39,25 +37,25 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        try (DatabaseHelper dbHelper = new DatabaseHelper(getContext())) {
-            allTripsList = dbHelper.getAllTrips();
-        }
+        dbHelper = new DatabaseHelper(getContext());
+        allTripsList = dbHelper.getAllTrips();
+
+        SessionManager sessionManager = SessionManager.getInstance(getContext());
+        int currentUserId = sessionManager.getUserId();
 
         filteredTripsList.clear();
         filteredTripsList.addAll(allTripsList);
 
-        adapter = new TripAdapter(filteredTripsList, this);
+        adapter = new TripAdapter(filteredTripsList, dbHelper, currentUserId, this);
         recyclerView.setAdapter(adapter);
 
         TextWatcher filterWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 applyFilters();
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         };
@@ -76,15 +74,13 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
         if (!priceQuery.isEmpty()) {
             try {
                 maxBudget = Double.parseDouble(priceQuery);
-            } catch (NumberFormatException ignored) {
-            }
+            } catch (NumberFormatException ignored) {}
         }
 
         filteredTripsList.clear();
         for (Trip trip : allTripsList) {
             boolean matchesSearch = trip.getDestination().toLowerCase().contains(searchQuery);
             boolean matchesPrice = trip.getPrice() <= maxBudget;
-
             if (matchesSearch && matchesPrice) {
                 filteredTripsList.add(trip);
             }
@@ -99,5 +95,13 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
         transaction.replace(R.id.fragment_container, detailFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
     }
 }

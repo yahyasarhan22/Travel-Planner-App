@@ -5,14 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView; // Added import
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.bumptech.glide.Glide; // Added import
 import com.example.a1221858_1220137_courseproject.R;
 import com.example.a1221858_1220137_courseproject.DatabaseHelper;
 import com.example.a1221858_1220137_courseproject.Trip;
+import java.util.List;
 
 public class TripDetailFragment extends Fragment {
 
@@ -20,8 +22,7 @@ public class TripDetailFragment extends Fragment {
     private int tripId;
     private DatabaseHelper dbHelper;
 
-    public TripDetailFragment() {
-    }
+    public TripDetailFragment() {}
 
     public static TripDetailFragment newInstance(int tripId) {
         TripDetailFragment fragment = new TripDetailFragment();
@@ -45,6 +46,8 @@ public class TripDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trip_detail, container, false);
 
+        // Bind layout elements
+        ImageView ivTripImage = view.findViewById(R.id.detail_iv_trip);
         TextView tvDestination = view.findViewById(R.id.detail_tv_destination);
         TextView tvCountry = view.findViewById(R.id.detail_tv_country);
         TextView tvDuration = view.findViewById(R.id.detail_tv_duration);
@@ -53,27 +56,37 @@ public class TripDetailFragment extends Fragment {
         TextView tvDescription = view.findViewById(R.id.detail_tv_description);
         Button btnBook = view.findViewById(R.id.btn_book_trip);
 
-        Trip currentTrip = null;
-        for (Trip t : dbHelper.getAllTrips()) {
+        Trip foundTrip = null;
+        List<Trip> trips = dbHelper.getAllTrips();
+        for (Trip t : trips) {
             if (t.getId() == tripId) {
-                currentTrip = t;
+                foundTrip = t;
                 break;
             }
         }
 
+        final Trip currentTrip = foundTrip;
+
         if (currentTrip != null) {
             tvDestination.setText(currentTrip.getDestination());
             tvCountry.setText(currentTrip.getCountry());
-            tvDuration.setText(currentTrip.getDurationDays() + " Days");
+            tvDuration.setText(currentTrip.getDuration());
             tvPrice.setText("$" + currentTrip.getPrice());
             tvRating.setText("★ " + currentTrip.getRating());
             tvDescription.setText(currentTrip.getDescription());
+
+            Glide.with(this)
+                    .load(currentTrip.getImageUrl())
+                    .centerCrop()
+                    .placeholder(android.R.drawable.ic_menu_gallery)
+                    .error(android.R.drawable.stat_notify_error)
+                    .into(ivTripImage);
         }
 
-        btnBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Opening reservation form...", Toast.LENGTH_SHORT).show();
+        btnBook.setOnClickListener(v -> {
+            if (currentTrip != null) {
+                ReservationDialogHelper dialogHelper = new ReservationDialogHelper(requireContext());
+                dialogHelper.showReservationDialog(currentTrip.getId(), currentTrip.getDestination());
             }
         });
 

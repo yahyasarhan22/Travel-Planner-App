@@ -30,6 +30,13 @@
             android:textSize="16sp"
             android:textStyle="italic"
             android:layout_marginBottom="@dimen/spacing_medium"/>
+        <ImageView
+            android:id="@+id/detail_iv_trip"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:background="@color/left_bg_light"
+            android:contentDescription="Detailed destination photo view" />
 
         <LinearLayout
             android:layout_width="match_parent"
