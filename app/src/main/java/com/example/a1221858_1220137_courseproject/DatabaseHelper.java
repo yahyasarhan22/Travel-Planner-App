@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+// DatabaseHelper extends SQLiteOpenHelper to handle the database
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database name and version
@@ -27,7 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ---------------------------------------------------------------
     // onCreate — creates all three tables when the database is first made
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -102,7 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // USER methods
 
     // Insert a User into the USER table
-    // Uses ContentValues just like lab manual insertCustomer method
     // We do NOT put the ID — SQLite assigns it automatically with AUTOINCREMENT
     public void insertUser(User user) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
@@ -121,10 +120,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_USER, null, contentValues);
     }
 
-    // Get all users — returns a Cursor
+    // Get all users — returns a Cursor, same as getAllCustomers() in lab manual
     public Cursor getAllUsers() {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_USER, null);
+    }
+
+    // Update user profile info — first name, last name, phone, password, profile pic
+    public void updateUser(int userId, String firstName, String lastName,
+                           String phone, String password, String profilePic) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("FIRST_NAME",  firstName);
+        contentValues.put("LAST_NAME",   lastName);
+        contentValues.put("PHONE",       phone);
+        contentValues.put("PASSWORD",    password);
+        contentValues.put("PROFILE_PIC", profilePic);
+        sqLiteDatabase.update(TABLE_USER, contentValues, "ID = ?",
+                new String[]{String.valueOf(userId)});
     }
 
     // Get one user by email and password — used for login check
@@ -160,7 +173,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TRIP, null);
     }
 
-    // ===============================================================
     // RESERVATION methods
 
     // Insert a Reservation into the RESERVATION table
@@ -196,7 +208,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ===============================================================
     // FAVORITE methods
-
     // Add a trip to favorites for a user
     public void addFavorite(int userId, int tripId) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/left_bg_light"
+    android:padding="@dimen/spacing_large"
+    android:gravity="center">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/left_primary_dark"
+        android:layout_marginBottom="@dimen/spacing_small" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="We are here to help you plan your perfect trip!"
+        android:textSize="14sp"
+        android:textColor="@color/gray_text"
+        android:layout_marginBottom="@dimen/spacing_large" />
+
+    <!-- Call Us button -->
+    <Button
+        android:id="@+id/button_callUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📞  Call Us"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/left_primary"
+        android:padding="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:textSize="16sp" />
+
+    <!-- Locate Us button -->
+    <Button
+        android:id="@+id/button_locateUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📍  Locate Us"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/left_primary"
+        android:padding="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:textSize="16sp" />
+
+    <!-- Email Us button -->
+    <Button
+        android:id="@+id/button_emailUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✉️  Email Us"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/left_primary"
+        android:padding="@dimen/spacing_medium"
+        android:textSize="16sp" />
+
+</LinearLayout>
