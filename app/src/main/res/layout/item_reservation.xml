@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="@dimen/spacing_medium"
+    android:layout_marginBottom="@dimen/spacing_medium"
+    android:elevation="4dp">
+
+    <!-- Trip destination name -->
+    <TextView
+        android:id="@+id/textView_tripName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trip Destination"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/left_primary_dark"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Reservation date -->
+    <TextView
+        android:id="@+id/textView_reservationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date: --"
+        android:textSize="13sp"
+        android:textColor="@color/gray_text"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Reservation type -->
+    <TextView
+        android:id="@+id/textView_reservationType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type: --"
+        android:textSize="13sp"
+        android:textColor="@color/gray_text"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Quantity -->
+    <TextView
+        android:id="@+id/textView_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quantity: --"
+        android:textSize="13sp"
+        android:textColor="@color/gray_text"
+        android:layout_marginBottom="@dimen/spacing_small" />
+
+    <!-- Status badge -->
+    <TextView
+        android:id="@+id/textView_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmed"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/left_primary"
+        android:background="@drawable/input_background"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+</LinearLayout>

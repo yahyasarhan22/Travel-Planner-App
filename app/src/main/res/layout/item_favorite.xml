@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="@dimen/spacing_medium"
+    android:layout_marginBottom="@dimen/spacing_medium"
+    android:elevation="4dp">
+
+    <!-- Trip destination -->
+    <TextView
+        android:id="@+id/textView_fav_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Destination"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/left_primary_dark"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Trip duration -->
+    <TextView
+        android:id="@+id/textView_fav_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Duration: --"
+        android:textSize="13sp"
+        android:textColor="@color/gray_text"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Trip price -->
+    <TextView
+        android:id="@+id/textView_fav_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price: --"
+        android:textSize="13sp"
+        android:textColor="@color/gray_text"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- Buttons row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Book now button -->
+        <Button
+            android:id="@+id/button_fav_book"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Book Now"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/left_primary"
+            android:layout_marginEnd="@dimen/spacing_small" />
+
+        <!-- Remove from favorites button -->
+        <Button
+            android:id="@+id/button_fav_remove"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Remove"
+            android:textColor="@color/white"
+            android:backgroundTint="#E53935" />
+
+    </LinearLayout>
+
+</LinearLayout>
