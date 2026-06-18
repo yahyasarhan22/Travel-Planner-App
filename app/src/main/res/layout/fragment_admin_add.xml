@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/left_bg_light"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register New Admin"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/left_primary_dark"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="@dimen/spacing_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create a new administrator account"
+            android:textSize="13sp"
+            android:textColor="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_large" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_admin_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter admin email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_admin_firstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter first name"
+            android:inputType="textPersonName"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_admin_lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter last name"
+            android:inputType="textPersonName"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_admin_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="At least 6 chars, 1 letter, 1 number"
+            android:inputType="textPassword"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_admin_confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Re-enter password"
+            android:inputType="textPassword"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinner_admin_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Major"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinner_admin_major"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textColor="@color/left_primary_dark"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editText_admin_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter phone number"
+            android:inputType="phone"
+            android:background="@drawable/input_background"
+            android:padding="@dimen/spacing_medium"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray_text"
+            android:layout_marginBottom="@dimen/spacing_large" />
+
+        <Button
+            android:id="@+id/button_admin_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Admin Account"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/left_primary"
+            android:padding="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_large" />
+
+    </LinearLayout>
+</ScrollView>

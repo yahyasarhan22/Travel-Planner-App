@@ -14,9 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.a1221858_1220137_courseproject.R;
-import com.example.a1221858_1220137_courseproject.DatabaseHelper;
-import com.example.a1221858_1220137_courseproject.Trip;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +31,12 @@ public class AdminTripsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_trips, container, false);
-
         recyclerView = view.findViewById(R.id.rv_admin_trips);
         btnAddTrip = view.findViewById(R.id.btn_admin_add_trip);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dbHelper = new DatabaseHelper(getContext());
-
         refreshData();
-
         btnAddTrip.setOnClickListener(v -> showTripDialog(null));
-
         return view;
     }
 
@@ -115,16 +107,13 @@ public class AdminTripsFragment extends Fragment {
                 dbHelper.insertTrip(trip);
                 Toast.makeText(getContext(), "Destination added successfully", Toast.LENGTH_SHORT).show();
             }
-
             dialog.dismiss();
             refreshData();
         });
-
         dialog.show();
     }
 
     private class AdminTripAdapter extends RecyclerView.Adapter<AdminTripAdapter.AdminHolder> {
-
         @NonNull
         @Override
         public AdminHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -137,7 +126,6 @@ public class AdminTripsFragment extends Fragment {
             Trip t = tripsList.get(position);
             holder.tvDest.setText(t.getDestination());
             holder.tvPrice.setText("$" + t.getPrice());
-
             holder.btnEdit.setOnClickListener(v -> showTripDialog(t));
             holder.btnDelete.setOnClickListener(v -> {
                 dbHelper.deleteTrip(t.getId());

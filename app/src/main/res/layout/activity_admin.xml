@@ -5,40 +5,51 @@
     android:background="@color/left_bg_light"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/left_primary_dark"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:paddingLeft="@dimen/spacing_medium"
         android:paddingRight="@dimen/spacing_medium">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
             android:text="Administrator Console"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
-    </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_admin_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:backgroundTint="#D32F2F"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/btn_nav_trips"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:text="Manage Trips"
-            android:textColor="@color/left_primary"
-            android:textStyle="bold" />
+        android:weightSum="4"> <Button
+        android:id="@+id/btn_nav_trips"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Manage Trips"
+        android:textColor="@color/left_primary"
+        android:textStyle="bold"
+        android:textSize="11sp" />
 
         <Button
             android:id="@+id/btn_nav_users"
@@ -48,7 +59,30 @@
             android:background="?android:attr/selectableItemBackground"
             android:text="Manage Users"
             android:textColor="@color/gray_text"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/btn_nav_reservations"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="Reservations"
+            android:textColor="@color/gray_text"
+            android:textStyle="bold"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/btn_nav_add_admin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="Add Admin"
+            android:textColor="@color/gray_text"
+            android:textStyle="bold"
+            android:textSize="11sp" />
     </LinearLayout>
 
     <FrameLayout

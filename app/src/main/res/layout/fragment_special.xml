@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popular Destinations"
+        android:text="Exclusive Offers"
         android:textColor="@color/left_primary_dark"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top-rated experiences highly recommended by travelers worldwide."
+        android:text="Top-rated elite experiences at pocket-friendly values under $600."
         android:textColor="@color/gray_text"
         android:textSize="14sp"
         android:layout_marginBottom="@dimen/spacing_medium"/>
