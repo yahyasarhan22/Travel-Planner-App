@@ -2,6 +2,7 @@ package com.example.a1221858_1220137_courseproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -30,7 +31,8 @@ public class IntroductionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConnectionAsyncTask task = new ConnectionAsyncTask(IntroductionActivity.this);
-                task.execute("http://your-rest-api-endpoint/api/trips");
+                // Corrected URL path
+                task.execute("https://6a33f5818248ee962fa4cd44.mockapi.io/trips");
             }
         });
     }
@@ -46,10 +48,14 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     public void onDataFetchSuccess(String rawJson) {
+        Log.d("IntroductionActivity", "Raw JSON response: " + rawJson);
         List<Trip> fetchedTrips = TripJsonParser.getTripsFromJson(rawJson);
+        
         if (fetchedTrips != null && !fetchedTrips.isEmpty()) {
-
+            DatabaseHelper dbHelper = new DatabaseHelper(this);
+            
             for (Trip trip : fetchedTrips) {
+                dbHelper.insertTrip(trip);
             }
 
             Toast.makeText(this, "Sync Complete! Saved " + fetchedTrips.size() + " trips.", Toast.LENGTH_LONG).show();
@@ -58,7 +64,9 @@ public class IntroductionActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, "Failed to parse synchronized payloads.", Toast.LENGTH_SHORT).show();
+            String message = (fetchedTrips == null) ? "Parsing error: Invalid data format." : "Connected, but no trips were found.";
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Log.e("IntroductionActivity", message);
         }
     }
 
