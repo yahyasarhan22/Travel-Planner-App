@@ -1,14 +1,14 @@
 plugins {
-    id 'com.android.application' version '8.2.0'
+    alias(libs.plugins.android.application)
 }
 
 android {
     namespace 'com.example.a1221858_1220137_courseproject'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.example.a1221858_1220137_courseproject"
-        minSdk 24
+        minSdk 28
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -29,10 +29,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
 }

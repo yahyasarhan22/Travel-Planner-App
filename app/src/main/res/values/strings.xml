@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">1221858_1220137_CourseProject</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation sidebar</string>
+    <string name="navigation_drawer_close">Close navigation sidebar</string>
+    <string name="home_welcome_title">Welcome, Traveler!</string>
+    <string name="home_welcome_subtitle">Explore your itineraries seamlessly and completely offline.</string>
+    <string name="card_overview_title">Application Overview</string>
+    <string name="card_overview_body">Turn your dream trips into reality. Our app helps you organize all your itineraries in one place, discover new events, and manage your bookings effortlessly. Whether you are planning a weekend getaway or a long-distance expedition, your plans stay with you anytime, anywhere..</string>
+
+    <string name="card_theme_title">Design Philosophy &amp; Theme</string>
+    <string name="card_theme_body">The \"Left\" theme is built to be your calm, focused travel partner. By pairing deep, grounding primary tones with vibrant accents, we ensure your screen remains perfectly readable from bright daylight to dim hotel rooms. Every animation is crafted with smooth, fluid motion, making your interaction with the app feel natural and responsive.</string>
+    <string name="quick_metrics_title">System Architecture Status</string>
+    <string name="status_offline_label">Database Layer</string>
+    <string name="status_offline_val">SQLite Local Cache</string>
+    <string name="status_ui_label">Interface System</string>
+    <string name="status_ui_val">Material Component Library</string>
+    <string name="title_add_admin">Register New Admin</string>
+    <string name="hint_admin_email">Admin Email Address</string>
+    <string name="hint_admin_password">Password (Min. 8 characters)</string>
+    <string name="hint_admin_confirm_password">Confirm Password</string>
+    <string name="btn_create_admin">Create Account</string>
+    <string name="error_empty_fields">Please fill in all entry fields.</string>
+    <string name="error_password_match">Passwords do not match.</string>
+    <string name="error_password_short">Password must be at least 8 characters long.</string>
+    <string name="error_email_exists">This email address is already registered.</string>
+    <string name="success_admin_created">Administrator account created successfully!</string>
 </resources>
