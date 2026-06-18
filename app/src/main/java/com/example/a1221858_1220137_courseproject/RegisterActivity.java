@@ -77,17 +77,17 @@ public class RegisterActivity extends AppCompatActivity {
     // Same approach as lab manual spinner setup
     private void setupSpinners() {
 
-        // Gender options
+        // Gender options using the custom high-visibility item layout
         String[] genderOptions = {"Select Gender", "Male", "Female"};
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.spinner_item, // Swapped from android.R.layout.simple_spinner_item
                 genderOptions
         );
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(genderAdapter);
 
-        // Major options
+        // Major options using the custom high-visibility item layout
         String[] majorOptions = {
                 "Select Major",
                 "Computer Engineering",
@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         };
         ArrayAdapter<String> majorAdapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.spinner_item, // Swapped from android.R.layout.simple_spinner_item
                 majorOptions
         );
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

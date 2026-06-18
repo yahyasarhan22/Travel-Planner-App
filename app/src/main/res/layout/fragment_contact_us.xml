@@ -8,7 +8,6 @@
     android:padding="@dimen/spacing_large"
     android:gravity="center">
 
-    <!-- Title -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +17,6 @@
         android:textColor="@color/left_primary_dark"
         android:layout_marginBottom="@dimen/spacing_small" />
 
-    <!-- Subtitle -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +25,6 @@
         android:textColor="@color/gray_text"
         android:layout_marginBottom="@dimen/spacing_large" />
 
-    <!-- Call Us button -->
     <Button
         android:id="@+id/button_callUs"
         android:layout_width="match_parent"
@@ -39,7 +36,6 @@
         android:layout_marginBottom="@dimen/spacing_medium"
         android:textSize="16sp" />
 
-    <!-- Locate Us button -->
     <Button
         android:id="@+id/button_locateUs"
         android:layout_width="match_parent"
@@ -51,7 +47,6 @@
         android:layout_marginBottom="@dimen/spacing_medium"
         android:textSize="16sp" />
 
-    <!-- Email Us button -->
     <Button
         android:id="@+id/button_emailUs"
         android:layout_width="match_parent"

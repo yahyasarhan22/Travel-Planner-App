@@ -7,13 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.a1221858_1220137_courseproject.R;
-import com.example.a1221858_1220137_courseproject.TripAdapter;
-import com.example.a1221858_1220137_courseproject.DatabaseHelper;
-import com.example.a1221858_1220137_courseproject.Trip;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +20,7 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
     private List<Trip> popularTripsList = new ArrayList<>();
 
     public SpecialFragment() {
+        // Required empty public constructor
     }
 
     @Nullable
@@ -32,32 +28,44 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_special, container, false);
 
+        // Initialize RecyclerView and Layout Manager
         recyclerView = view.findViewById(R.id.rv_special_trips);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Initialize the class-level database helper
         dbHelper = new DatabaseHelper(getContext());
 
-        popularTripsList.clear();
-        for (Trip trip : dbHelper.getAllTrips()) {
-            if (trip.getRating() >= 4.5) {
-                popularTripsList.add(trip);
-            }
-        }
+        // Load filtered datasets
+        loadPopularTrips();
 
-        adapter = new TripAdapter(popularTripsList, this);
+        // Fetch active user context from your session cache layer
+        int currentUserId = SessionManager.getInstance(getContext()).getUserId();
+
+        // Pass dependencies neatly into your custom TripAdapter
+        adapter = new TripAdapter(popularTripsList, dbHelper, currentUserId, this);
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
+    private void loadPopularTrips() {
+        popularTripsList.clear();
+        List<Trip> allTrips = dbHelper.getAllTrips();
+
+        for (Trip trip : allTrips) {
+            // Evaluates both rating constraints and budget ceilings simultaneously
+            if (trip.getRating() >= 8.5 && trip.getPrice() < 600.0) {
+                popularTripsList.add(trip);
+            }
+        }
+    }
+
     @Override
     public void onTripClick(Trip trip) {
         TripDetailFragment detailFragment = TripDetailFragment.newInstance(trip.getId());
-        if (getFragmentManager() != null) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, detailFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, detailFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
