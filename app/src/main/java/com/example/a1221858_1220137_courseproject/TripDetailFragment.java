@@ -11,14 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.a1221858_1220137_courseproject.R;
-import com.example.a1221858_1220137_courseproject.DataBaseHelper;
+import com.example.a1221858_1220137_courseproject.DatabaseHelper;
 import com.example.a1221858_1220137_courseproject.Trip;
 
 public class TripDetailFragment extends Fragment {
 
     private static final String ARG_TRIP_ID = "trip_id";
     private int tripId;
-    private DataBaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
 
     public TripDetailFragment() {
     }
@@ -37,7 +37,7 @@ public class TripDetailFragment extends Fragment {
         if (getArguments() != null) {
             tripId = getArguments().getInt(ARG_TRIP_ID);
         }
-        dbHelper = new DataBaseHelper(getContext());
+        dbHelper = new DatabaseHelper(getContext());
     }
 
     @Nullable

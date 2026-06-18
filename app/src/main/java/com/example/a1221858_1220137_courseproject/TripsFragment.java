@@ -7,27 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.a1221858_1220137_courseproject.R;
-import com.example.a1221858_1220137_courseproject.TripAdapter;
-import com.example.a1221858_1220137_courseproject.DataBaseHelper;
-import com.example.a1221858_1220137_courseproject.Trip;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TripsFragment extends Fragment implements TripAdapter.OnTripClickListener {
 
     private EditText etSearch, etMaxPrice;
-    private RecyclerView recyclerView;
     private TripAdapter adapter;
-    private DataBaseHelper dbHelper;
     private List<Trip> allTripsList = new ArrayList<>();
-    private List<Trip> filteredTripsList = new ArrayList<>();
+    private final List<Trip> filteredTripsList = new ArrayList<>();
 
     public TripsFragment() {
     }
@@ -39,12 +35,15 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
 
         etSearch = view.findViewById(R.id.et_search_destination);
         etMaxPrice = view.findViewById(R.id.et_filter_price);
-        recyclerView = view.findViewById(R.id.rv_trips_list);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_trips_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        dbHelper = new DataBaseHelper(getContext());
-        allTripsList = dbHelper.getAllTrips();
+        try (DatabaseHelper dbHelper = new DatabaseHelper(getContext())) {
+            allTripsList = dbHelper.getAllTrips();
+        }
+
+        filteredTripsList.clear();
         filteredTripsList.addAll(allTripsList);
 
         adapter = new TripAdapter(filteredTripsList, this);
@@ -77,8 +76,7 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
         if (!priceQuery.isEmpty()) {
             try {
                 maxBudget = Double.parseDouble(priceQuery);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+            } catch (NumberFormatException ignored) {
             }
         }
 
@@ -97,11 +95,9 @@ public class TripsFragment extends Fragment implements TripAdapter.OnTripClickLi
     @Override
     public void onTripClick(Trip trip) {
         TripDetailFragment detailFragment = TripDetailFragment.newInstance(trip.getId());
-        if (getFragmentManager() != null) {
-            androidx.fragment.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, detailFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, detailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

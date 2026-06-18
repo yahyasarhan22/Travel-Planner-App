@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a1221858_1220137_courseproject.R;
-import com.example.a1221858_1220137_courseproject.DataBaseHelper;
+import com.example.a1221858_1220137_courseproject.DatabaseHelper;
 import com.example.a1221858_1220137_courseproject.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 public class AdminUsersFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private DataBaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
     private List<User> usersList = new ArrayList<>();
     private AdminUserAdapter adapter;
 
@@ -34,7 +34,7 @@ public class AdminUsersFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_admin_users);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        dbHelper = new DataBaseHelper(getContext());
+        dbHelper = new DatabaseHelper(getContext());
 
         refreshList();
         return view;

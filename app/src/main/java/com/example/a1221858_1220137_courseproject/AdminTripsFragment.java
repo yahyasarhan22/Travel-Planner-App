@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a1221858_1220137_courseproject.R;
-import com.example.a1221858_1220137_courseproject.DataBaseHelper;
+import com.example.a1221858_1220137_courseproject.DatabaseHelper;
 import com.example.a1221858_1220137_courseproject.Trip;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class AdminTripsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private Button btnAddTrip;
-    private DataBaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
     private List<Trip> tripsList = new ArrayList<>();
     private AdminTripAdapter adapter;
 
@@ -39,7 +39,7 @@ public class AdminTripsFragment extends Fragment {
         btnAddTrip = view.findViewById(R.id.btn_admin_add_trip);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        dbHelper = new DataBaseHelper(getContext());
+        dbHelper = new DatabaseHelper(getContext());
 
         refreshData();
 

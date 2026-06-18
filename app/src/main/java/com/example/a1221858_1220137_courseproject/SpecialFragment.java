@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a1221858_1220137_courseproject.R;
 import com.example.a1221858_1220137_courseproject.TripAdapter;
-import com.example.a1221858_1220137_courseproject.DataBaseHelper;
+import com.example.a1221858_1220137_courseproject.DatabaseHelper;
 import com.example.a1221858_1220137_courseproject.Trip;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
 
     private RecyclerView recyclerView;
     private TripAdapter adapter;
-    private DataBaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
     private List<Trip> popularTripsList = new ArrayList<>();
 
     public SpecialFragment() {
@@ -35,7 +35,7 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
         recyclerView = view.findViewById(R.id.rv_special_trips);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        dbHelper = new DataBaseHelper(getContext());
+        dbHelper = new DatabaseHelper(getContext());
 
         popularTripsList.clear();
         for (Trip trip : dbHelper.getAllTrips()) {
