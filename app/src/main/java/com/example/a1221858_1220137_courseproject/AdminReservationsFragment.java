@@ -43,7 +43,6 @@ public class AdminReservationsFragment extends Fragment {
 
         refreshList();
 
-        // Safe registration of the filtering listener
         etSearchReservations.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

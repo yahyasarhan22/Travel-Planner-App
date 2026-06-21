@@ -13,17 +13,15 @@
         android:padding="@dimen/spacing_large"
         android:gravity="center">
 
-        <!-- App logo / icon at the top -->
         <ImageView
             android:id="@+id/imageView_logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="@dimen/spacing_large"
-            android:src="@android:drawable/ic_menu_gallery"
+            android:src="@drawable/ic_travel_logo"
             android:contentDescription="App Logo" />
 
-        <!-- App title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +31,6 @@
             android:textColor="@color/left_primary_dark"
             android:layout_marginBottom="@dimen/spacing_small" />
 
-        <!-- Small welcome message -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +39,6 @@
             android:textColor="@color/gray_text"
             android:layout_marginBottom="@dimen/spacing_large" />
 
-        <!-- Email field -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +61,6 @@
             android:layout_marginBottom="@dimen/spacing_medium"
             android:importantForAutofill="no" />
 
-        <!-- Password field -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,7 +83,6 @@
             android:layout_marginBottom="@dimen/spacing_medium"
             android:importantForAutofill="no" />
 
-        <!-- Remember Me checkbox -->
         <CheckBox
             android:id="@+id/checkBox_rememberMe"
             android:layout_width="wrap_content"
@@ -98,7 +92,6 @@
             android:buttonTint="@color/left_primary"
             android:layout_marginBottom="@dimen/spacing_large" />
 
-        <!-- Login button -->
         <Button
             android:id="@+id/button_login"
             android:layout_width="match_parent"
@@ -109,7 +102,6 @@
             android:padding="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_medium" />
 
-        <!-- Sign up button -->
         <Button
             android:id="@+id/button_signUp"
             android:layout_width="match_parent"
