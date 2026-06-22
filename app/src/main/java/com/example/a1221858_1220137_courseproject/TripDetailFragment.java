@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView; // Added import
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.bumptech.glide.Glide; // Added import
+import com.bumptech.glide.Glide;
 import com.example.a1221858_1220137_courseproject.R;
 import com.example.a1221858_1220137_courseproject.DatabaseHelper;
 import com.example.a1221858_1220137_courseproject.Trip;
@@ -46,7 +46,6 @@ public class TripDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trip_detail, container, false);
 
-        // Bind layout elements
         ImageView ivTripImage = view.findViewById(R.id.detail_iv_trip);
         TextView tvDestination = view.findViewById(R.id.detail_tv_destination);
         TextView tvCountry = view.findViewById(R.id.detail_tv_country);

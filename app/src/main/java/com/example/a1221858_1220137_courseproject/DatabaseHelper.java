@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                           SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
+
     public static class ReservationDetail {
         public int id;
         public int quantity;
@@ -101,7 +102,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    // USER methods
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, oldVersion, newVersion);
+    }
+
     public void insertUser(User user) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -170,7 +175,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
-    // TRIP methods
     public void insertTrip(Trip trip) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -226,7 +230,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_TRIP, "ID = ?", new String[]{String.valueOf(tripId)});
     }
 
-    // RESERVATION methods
     public void insertReservation(Reservation reservation) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -247,7 +250,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
-    // FAVORITE methods
     public void addFavorite(int userId, int tripId) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();

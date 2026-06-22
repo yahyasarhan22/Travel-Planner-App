@@ -20,7 +20,6 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
     private List<Trip> popularTripsList = new ArrayList<>();
 
     public SpecialFragment() {
-        // Required empty public constructor
     }
 
     @Nullable
@@ -28,20 +27,15 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_special, container, false);
 
-        // Initialize RecyclerView and Layout Manager
         recyclerView = view.findViewById(R.id.rv_special_trips);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Initialize the class-level database helper
         dbHelper = new DatabaseHelper(getContext());
 
-        // Load filtered datasets
         loadPopularTrips();
 
-        // Fetch active user context from your session cache layer
         int currentUserId = SessionManager.getInstance(getContext()).getUserId();
 
-        // Pass dependencies neatly into your custom TripAdapter
         adapter = new TripAdapter(popularTripsList, dbHelper, currentUserId, this);
         recyclerView.setAdapter(adapter);
 
@@ -53,7 +47,7 @@ public class SpecialFragment extends Fragment implements TripAdapter.OnTripClick
         List<Trip> allTrips = dbHelper.getAllTrips();
 
         for (Trip trip : allTrips) {
-            // Evaluates both rating constraints and budget ceilings simultaneously
+            // Filter by rating and price
             if (trip.getRating() >= 8.5 && trip.getPrice() < 600.0) {
                 popularTripsList.add(trip);
             }

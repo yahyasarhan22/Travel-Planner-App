@@ -59,25 +59,19 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
             holder.btnFavorite.setImageResource(android.R.drawable.btn_star_big_off);
         }
 
-        holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (dbHelper.isFavorite(currentUserId, trip.getId())) {
-                    dbHelper.removeFavorite(currentUserId, trip.getId());
-                    holder.btnFavorite.setImageResource(android.R.drawable.btn_star_big_off);
-                } else {
-                    dbHelper.addFavorite(currentUserId, trip.getId());
-                    holder.btnFavorite.setImageResource(android.R.drawable.btn_star_big_on);
-                }
+        holder.btnFavorite.setOnClickListener(v -> {
+            if (dbHelper.isFavorite(currentUserId, trip.getId())) {
+                dbHelper.removeFavorite(currentUserId, trip.getId());
+                holder.btnFavorite.setImageResource(android.R.drawable.btn_star_big_off);
+            } else {
+                dbHelper.addFavorite(currentUserId, trip.getId());
+                holder.btnFavorite.setImageResource(android.R.drawable.btn_star_big_on);
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (clickListener != null) {
-                    clickListener.onTripClick(trip);
-                }
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onTripClick(trip);
             }
         });
     }

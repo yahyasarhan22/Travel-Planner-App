@@ -51,7 +51,7 @@ public class TripJsonParser {
         
         if (jsonObject.has("durationDays")) {
             trip.setDurationDays(jsonObject.optInt("durationDays"));
-        } else { // fallback
+        } else {
             trip.setDurationF(jsonObject.optString("duration"));
         }
         

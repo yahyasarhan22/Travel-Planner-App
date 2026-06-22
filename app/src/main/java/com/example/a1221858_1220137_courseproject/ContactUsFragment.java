@@ -22,10 +22,8 @@ public class ContactUsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
         Animation bounceAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
-        // 1. Load your custom XML tween animation definition
         Animation entryAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
 
-        // 2. Clear out any layout lag and apply it directly to the root view container
         view.startAnimation(entryAnimation);
 
         Button buttonCall = view.findViewById(R.id.button_callUs);
@@ -33,9 +31,7 @@ public class ContactUsFragment extends Fragment {
         Button buttonEmail = view.findViewById(R.id.button_emailUs);
 
         buttonCall.setOnClickListener(v -> {
-            // Fire the bounce animation on the specific button that was tapped
             v.startAnimation(bounceAnim);
-
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:+970569512402"));
             startActivity(callIntent);
@@ -43,7 +39,6 @@ public class ContactUsFragment extends Fragment {
 
         buttonLocate.setOnClickListener(v -> {
             v.startAnimation(bounceAnim);
-
             Uri mapUri = Uri.parse("geo:31.9740,35.2316?q=Birzeit+University");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
             mapIntent.setPackage("com.google.android.apps.maps");
@@ -52,7 +47,6 @@ public class ContactUsFragment extends Fragment {
 
         buttonEmail.setOnClickListener(v -> {
             v.startAnimation(bounceAnim);
-
             Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
             emailIntent.setData(Uri.parse("mailto:travelplanner@support.com"));
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Travel Planner App Inquiry");

@@ -31,7 +31,6 @@ public class AdminAddFragment extends Fragment {
     private DatabaseHelper databaseHelper;
 
     public AdminAddFragment() {
-        // Required empty public constructor
     }
 
     @Nullable
@@ -39,10 +38,8 @@ public class AdminAddFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_add, container, false);
 
-        // Initialize DB Helper instance context safely
         databaseHelper = new DatabaseHelper(getContext());
 
-        // Connect local UI references to inflated XML elements
         editTextEmail           = view.findViewById(R.id.editText_admin_email);
         editTextFirstName       = view.findViewById(R.id.editText_admin_firstName);
         editTextLastName        = view.findViewById(R.id.editText_admin_lastName);
@@ -55,7 +52,6 @@ public class AdminAddFragment extends Fragment {
 
         setupSpinners();
 
-        // Attach custom interface entry animations natively via fragment context
         if (getContext() != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
             buttonRegister.startAnimation(fadeIn);
@@ -69,17 +65,15 @@ public class AdminAddFragment extends Fragment {
     private void setupSpinners() {
         if (getContext() == null) return;
 
-        // 1. Gender Spinner Setup
         String[] genderOptions = {"Select Gender", "Male", "Female"};
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(
                 getContext(),
-                R.layout.spinner_item, // Swapped from android.R.layout.simple_spinner_item
+                R.layout.spinner_item,
                 genderOptions
         );
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(genderAdapter);
 
-        // 2. Major Spinner Setup
         String[] majorOptions = {
                 "Select Major",
                 "Computer Engineering",
@@ -92,7 +86,7 @@ public class AdminAddFragment extends Fragment {
         };
         ArrayAdapter<String> majorAdapter = new ArrayAdapter<>(
                 getContext(),
-                R.layout.spinner_item, // Swapped from android.R.layout.simple_spinner_item
+                R.layout.spinner_item,
                 majorOptions
         );
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -100,7 +94,6 @@ public class AdminAddFragment extends Fragment {
     }
 
     private void handleAdminRegister() {
-        // --- Validate Email ---
         if (InputValidator.isEmpty(editTextEmail)) {
             editTextEmail.setError("Email is required");
             return;
@@ -110,7 +103,6 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Cross-Reference Existing Users to Prevent Collisions ---
         String email = editTextEmail.getText().toString().trim();
         List<User> userList = databaseHelper.getAllUsers();
         for (User account : userList) {
@@ -121,7 +113,6 @@ public class AdminAddFragment extends Fragment {
             }
         }
 
-        // --- Validate First Name ---
         if (InputValidator.isEmpty(editTextFirstName)) {
             editTextFirstName.setError("First name is required");
             return;
@@ -131,7 +122,6 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Validate Last Name ---
         if (InputValidator.isEmpty(editTextLastName)) {
             editTextLastName.setError("Last name is required");
             return;
@@ -141,7 +131,6 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Validate Password ---
         if (InputValidator.isEmpty(editTextPassword)) {
             editTextPassword.setError("Password is required");
             return;
@@ -151,7 +140,6 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Validate Confirm Password ---
         String password = editTextPassword.getText().toString().trim();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
         if (!password.equals(confirmPassword)) {
@@ -159,7 +147,6 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Validate Selection Spinners ---
         if (spinnerGender.getSelectedItemPosition() == 0) {
             Toast.makeText(getContext(), "Please select a gender", Toast.LENGTH_SHORT).show();
             return;
@@ -169,7 +156,6 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Validate Phone Number ---
         if (InputValidator.isEmpty(editTextPhone)) {
             editTextPhone.setError("Phone number is required");
             return;
@@ -179,17 +165,14 @@ public class AdminAddFragment extends Fragment {
             return;
         }
 
-        // --- Parse clean values ---
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName  = editTextLastName.getText().toString().trim();
         String gender    = spinnerGender.getSelectedItem().toString();
         String major     = spinnerMajor.getSelectedItem().toString();
         String phone     = editTextPhone.getText().toString().trim();
 
-        // Apply programmatic encryption layout layers
         String encryptedPassword = PasswordEncryptor.encrypt(password);
 
-        // Instantiates the User entity with IS_ADMIN explicitly set to 1
         User newAdmin = new User(
                 0,
                 email,
@@ -199,16 +182,12 @@ public class AdminAddFragment extends Fragment {
                 gender,
                 major,
                 phone,
-                "",   // Profile picture placeholder string literal
-                1     // Explicit administrative assignment flag
+                "",
+                1
         );
 
-        // Commit records to local storage schema
         databaseHelper.insertUser(newAdmin);
-
         Toast.makeText(getContext(), "Admin account added successfully!", Toast.LENGTH_LONG).show();
-
-        // Clear layout input elements upon generation completion
         clearFields();
     }
 

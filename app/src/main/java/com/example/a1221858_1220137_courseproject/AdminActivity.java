@@ -1,6 +1,5 @@
 package com.example.a1221858_1220137_courseproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -52,7 +51,7 @@ public class AdminActivity extends AppCompatActivity {
         btnTrips.setTextColor(getResources().getColor(R.color.gray_text));
         btnUsers.setTextColor(getResources().getColor(R.color.gray_text));
         btnReservations.setTextColor(getResources().getColor(R.color.gray_text));
-        btnAddAdmin.setTextColor(getResources().getColor(R.color.gray_text)); // Reset selection gray
+        btnAddAdmin.setTextColor(getResources().getColor(R.color.gray_text));
 
         activeSelection.setTextColor(getResources().getColor(R.color.left_primary));
     }
