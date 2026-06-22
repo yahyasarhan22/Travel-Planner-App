@@ -9,8 +9,7 @@
     <string name="card_overview_body">Turn your dream trips into reality. Our app helps you organize all your itineraries in one place, discover new events, and manage your bookings effortlessly. Whether you are planning a weekend getaway or a long-distance expedition, your plans stay with you anytime, anywhere..</string>
 
     <string name="card_theme_title">Design Philosophy &amp; Theme</string>
-    <string name="card_theme_body">The \"Left\" theme is built to be your calm, focused travel partner. By pairing deep, grounding primary tones with vibrant accents, we ensure your screen remains perfectly readable from bright daylight to dim hotel rooms. Every animation is crafted with smooth, fluid motion, making your interaction with the app feel natural and responsive.</string>
-    <string name="quick_metrics_title">System Architecture Status</string>
+    <string name="card_theme_body">The \"Left\" theme uses calm colors, clear contrast, and smooth motion to make your travel experience simple, readable, and enjoyable.</string>    <string name="quick_metrics_title">System Architecture Status</string>
     <string name="status_offline_label">Database Layer</string>
     <string name="status_offline_val">SQLite Local Cache</string>
     <string name="status_ui_label">Interface System</string>
